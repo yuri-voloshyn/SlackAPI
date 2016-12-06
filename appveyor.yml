@@ -41,7 +41,7 @@ build_script:
 
     nuget restore -SolutionDirectory . SlackAPI.Tests
 
-    msbuild SlackAPI.sln /verbosity:minimal /logger:"${env:ProgramFiles}\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll" /p:Configuration="Release"
+    msbuild SlackAPI.sln /verbosity:minimal /logger:"%PROGRAMFILES%\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll" /p:Configuration="Release"
 
     nuget pack SlackAPI.nuspec -Version %APPVEYOR_BUILD_VERSION%
 
