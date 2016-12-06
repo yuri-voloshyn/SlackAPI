@@ -43,7 +43,7 @@ build_script:
 
     msbuild SlackAPI.sln /verbosity:minimal /logger:"%PROGRAMFILES%\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll" /p:Configuration="Release"
 
-    vstest.console /logger:Appveyor SlackAPI.Tests\bin\Release\SlackAPI.Tests.dll
+    %xunit20%\xunit.console.x86 SlackAPI.Tests\bin\Release\SlackAPI.Tests.dll -appveyor
 
     nuget pack SlackAPI.nuspec -Version %APPVEYOR_BUILD_VERSION%
 
@@ -58,6 +58,8 @@ build_script:
     move SlackAPI\bin\Release\SlackAPI.1.0.5-%APPVEYOR_BUILD_NUMBER%.nupkg SlackAPI\bin\Release\SlackAPI-core.1.0.5-%APPVEYOR_BUILD_NUMBER%.nupkg
 
     move SlackAPI\bin\Release\SlackAPI.1.0.5-%APPVEYOR_BUILD_NUMBER%.symbols.nupkg SlackAPI\bin\Release\SlackAPI-core.1.0.5-%APPVEYOR_BUILD_NUMBER%.symbols.nupkg
+
+test: off
 
 artifacts:
 - path: SlackAPI.*.nupkg
