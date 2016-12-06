@@ -51,9 +51,9 @@ build_script:
 
     dotnet pack SlackAPI --configuration Release --version-suffix %APPVEYOR_BUILD_NUMBER%
 
-    mv SlackAPI\bin\Release\SlackAPI.1.0.5-%APPVEYOR_BUILD_NUMBER%.nupkg SlackAPI\bin\Release\SlackAPI-core.1.0.5-%APPVEYOR_BUILD_NUMBER%.nupkg
+    move SlackAPI\bin\Release\SlackAPI.1.0.5-%APPVEYOR_BUILD_NUMBER%.nupkg SlackAPI\bin\Release\SlackAPI-core.1.0.5-%APPVEYOR_BUILD_NUMBER%.nupkg
 
-    mv SlackAPI\bin\Release\SlackAPI.1.0.5-%APPVEYOR_BUILD_NUMBER%.symbols.nupkg SlackAPI\bin\Release\SlackAPI-core.1.0.5-%APPVEYOR_BUILD_NUMBER%.symbols.nupkg
+    move SlackAPI\bin\Release\SlackAPI.1.0.5-%APPVEYOR_BUILD_NUMBER%.symbols.nupkg SlackAPI\bin\Release\SlackAPI-core.1.0.5-%APPVEYOR_BUILD_NUMBER%.symbols.nupkg
 
 test_script:
 - cmd: >-
