@@ -6,7 +6,9 @@
     "xunit": "2.2.0-beta2-build3300",
     "dotnet-test-xunit": "2.2.0-preview2-build1029",
     "Microsoft.DotNet.InternalAbstractions": "1.0.0",
-    "SlackAPI": { "target": "project" }
+    "SlackAPI": {
+      "target": "project"
+    }
   },
 
   "buildOptions": {
@@ -23,7 +25,6 @@
         "Microsoft.NETCore.Platforms": "1.0.1"
       }
     },
-
     "netcoreapp1.0": {
       "dependencies": {
         "Microsoft.NETCore.App": {

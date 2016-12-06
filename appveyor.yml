@@ -34,15 +34,14 @@ before_build:
     "@
 
     $config | Set-Content SlackAPI.Tests\Configuration\config.json
-- nuget restore
 
 build_script:
 - cmd: >-
-    nuget restore -SolutionDirectory . SlackAPI\packages.config
+    nuget restore -SolutionDirectory . SlackAPI
 
-    nuget restore -SolutionDirectory . SlackAPI.Tests\packages.config
+    nuget restore -SolutionDirectory . SlackAPI.Tests
 
-    msbuild SlackAPI.sln /verbosity:minimal /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll" /p:Configuration="Release" /p:Platform="Any CPU" /p:CI_BUILD="true"
+    msbuild SlackAPI.sln /verbosity:minimal /logger:"${env:ProgramFiles}\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll" /p:Configuration="Release"
 
     nuget pack SlackAPI.nuspec -Version %APPVEYOR_BUILD_VERSION%
 
@@ -50,11 +49,11 @@ build_script:
 
     dotnet build SlackAPI SlackAPI.Tests --configuration Release
 
-    dotnet pack SlackAPI --configuration Release
+    dotnet pack SlackAPI --configuration Release --version-suffix %APPVEYOR_BUILD_NUMBER%
 
-    mv SlackAPI\bin\Release\SlackAPI.1.0.5.nupkg SlackAPI\bin\Release\SlackAPI-core.1.0.5.nupkg
+    mv SlackAPI\bin\Release\SlackAPI.1.0.5-%APPVEYOR_BUILD_NUMBER%.nupkg SlackAPI\bin\Release\SlackAPI-core.1.0.5-%APPVEYOR_BUILD_NUMBER%.nupkg
 
-    mv SlackAPI\bin\Release\SlackAPI.1.0.5.symbols.nupkg SlackAPI\bin\Release\SlackAPI-core.1.0.5.symbols.nupkg
+    mv SlackAPI\bin\Release\SlackAPI.1.0.5-%APPVEYOR_BUILD_NUMBER%.symbols.nupkg SlackAPI\bin\Release\SlackAPI-core.1.0.5-%APPVEYOR_BUILD_NUMBER%.symbols.nupkg
 
 test_script:
 - cmd: >-
