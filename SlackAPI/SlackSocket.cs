@@ -93,7 +93,7 @@ namespace SlackAPI
 
             Type routingToType = routingTo.GetType();
             Type slackMessage = typeof(SlackSocketMessage);
-            foreach (MethodInfo m in routingTo.GetType().GetMethods(BindingFlags.Instance | BindingFlags.CreateInstance | BindingFlags.FlattenHierarchy | BindingFlags.NonPublic | BindingFlags.Public))
+            foreach (MethodInfo m in routingTo.GetType().GetMethods(BindingFlags.Instance | BindingFlags.FlattenHierarchy | BindingFlags.NonPublic | BindingFlags.Public))
             {
                 ParameterInfo[] parameters = m.GetParameters();
                 if (parameters.Length != 1) continue;
