@@ -43,7 +43,7 @@ build_script:
 
     msbuild SlackAPI.sln /verbosity:minimal /logger:"%PROGRAMFILES%\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll" /p:Configuration="Release"
 
-    %xunit20%\xunit.console.x86 SlackAPI.Tests\bin\Release\SlackAPI.Tests.dll -appveyor
+    %xunit20%\xunit.console.x86 SlackAPI.Tests\bin\Release\SlackAPI.Tests.dll -appveyor -noshadow
 
     nuget pack SlackAPI.nuspec -Version %APPVEYOR_BUILD_VERSION%
 
