@@ -62,8 +62,5 @@ build_script:
 test: off
 
 artifacts:
-- path: SlackAPI.*.nupkg
+- path: SlackAPI*.nupkg
   name: SlackAPI Nuget package
-
-- path: SlackAPI-core.*.nupkg
-  name: SlackAPI .NetCore Nuget package
