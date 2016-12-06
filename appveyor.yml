@@ -53,11 +53,7 @@ build_script:
 
     dotnet test SlackAPI.Tests --configuration Release
 
-    dotnet pack SlackAPI --configuration Release --version-suffix %APPVEYOR_BUILD_NUMBER%
-
-    move SlackAPI\bin\Release\SlackAPI.1.0.5-%APPVEYOR_BUILD_NUMBER%.nupkg SlackAPI\bin\Release\SlackAPI-core.1.0.5-%APPVEYOR_BUILD_NUMBER%.nupkg
-
-    move SlackAPI\bin\Release\SlackAPI.1.0.5-%APPVEYOR_BUILD_NUMBER%.symbols.nupkg SlackAPI\bin\Release\SlackAPI-core.1.0.5-%APPVEYOR_BUILD_NUMBER%.symbols.nupkg
+    dotnet pack SlackAPI --configuration Release --version-suffix %APPVEYOR_BUILD_NUMBER%-core
 
 test: off
 
