@@ -60,5 +60,5 @@ test: off
 artifacts:
 - path: 'SlackAPI*.nupkg'
   name: SlackAPI Nuget package
-- path: '**\SlackAPI*-core.nupkg'
+- path: '**\SlackAPI*-core*.nupkg'
   name: SlackAPI .Net core Nuget package
