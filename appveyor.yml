@@ -58,5 +58,5 @@ build_script:
 test: off
 
 artifacts:
-- path: SlackAPI*.nupkg
+- path: '**\*.nupkg'
   name: SlackAPI Nuget package
