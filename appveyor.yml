@@ -53,12 +53,12 @@ build_script:
 
     dotnet test SlackAPI.Tests --configuration Release
 
-    dotnet pack SlackAPI --configuration Release --version-suffix %APPVEYOR_BUILD_NUMBER%-core
+    dotnet pack SlackAPI --configuration Release --version-suffix %APPVEYOR_BUILD_NUMBER%
 
 test: off
 
 artifacts:
 - path: 'SlackAPI*.nupkg'
   name: SlackAPI Nuget package
-- path: '**\SlackAPI*-core*.nupkg'
+- path: '**\SlackAPI*.nupkg'
   name: SlackAPI .Net core Nuget package
