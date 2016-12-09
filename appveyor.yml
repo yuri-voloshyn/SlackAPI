@@ -1,10 +1,10 @@
-version: 1.0.4.{build}
-
-configuration: Release
-platform: Any CPU
+version: 1.0.5.{build}
 
 pull_requests:
   do_not_increment_build_number: true
+
+nuget:
+  disable_publish_on_pr: true
 
 skip_branch_with_pr: true
 
@@ -36,29 +36,27 @@ before_build:
     $config | Set-Content SlackAPI.Tests\Configuration\config.json
 
 build_script:
-- cmd: >-
-    nuget restore -SolutionDirectory . SlackAPI
-
-    nuget restore -SolutionDirectory . SlackAPI.Tests
-
-    msbuild SlackAPI.sln /verbosity:minimal /logger:"%PROGRAMFILES%\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll" /p:Configuration="Release"
-
-    %xunit20%\xunit.console.x86 SlackAPI.Tests\bin\Release\SlackAPI.Tests.dll -appveyor -noshadow
-
-    nuget pack SlackAPI.nuspec -Version %APPVEYOR_BUILD_VERSION%
-
-    dotnet restore
-
-    dotnet build SlackAPI SlackAPI.Tests --configuration Release
-
-    dotnet test SlackAPI.Tests --configuration Release
-
-    dotnet pack SlackAPI --configuration Release --version-suffix %APPVEYOR_BUILD_NUMBER%
+- ps : .\build.ps1
 
 test: off
 
 artifacts:
-- path: 'SlackAPI*.nupkg'
-  name: SlackAPI Nuget package
-- path: '**\SlackAPI*.nupkg'
-  name: SlackAPI .Net core Nuget package
+- path: '.\artifacts\**\*.nupkg'
+  name: Nuget packages
+
+deploy:
+- provider: Nuget
+  server: https://www.myget.org/F/slackapi/api/v2
+  api_key:
+    secure: dt+bmkFjmkMgVdDXaaqTC4IRORfSrBSEePOGaaVPkEsKs/lGxxth21bkkBqMuJqM
+  # Deploy symbol package too
+  skip_symbols: false
+  symbol_server: https://www.myget.org/F/slackapi/symbols/api/v2/package
+
+#- provider: NuGet
+#  name: production
+#  api_key:
+#    secure: xxx
+#  on:
+#    branch: master
+#    appveyor_repo_tag: true
