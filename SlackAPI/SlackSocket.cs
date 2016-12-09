@@ -313,7 +313,7 @@ namespace SlackAPI
             {
                 this.socket.Abort();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }

@@ -16,8 +16,6 @@ namespace SlackAPI
 
         bool HelloReceived;
         public const int PingInterval = 3000;
-        int pinging;
-        Timer pingingThread;
 
         public long PingRoundTripMilliseconds { get; private set; }
         public bool IsReady { get { return HelloReceived; } }
