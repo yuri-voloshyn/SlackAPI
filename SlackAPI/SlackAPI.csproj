@@ -44,6 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\GlobalAssemblyVersion.cs">
+      <Link>Properties\GlobalAssemblyVersion.cs</Link>
+    </Compile>
     <Compile Include="Attachment.cs" />
     <Compile Include="Conversation.cs" />
     <Compile Include="Reaction.cs" />

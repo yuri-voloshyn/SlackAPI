@@ -1,6 +1,6 @@
 {
   "name": "SlackAPI",
-  "version": "1.0.5-*",
+  "version": "1.0.0-*",
 
   "description": "A Slack wrapper for direct interaction with their APIs.",
   "copyright": "Inumedia - Copyright ©  2014",

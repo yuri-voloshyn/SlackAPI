@@ -222,4 +222,7 @@ packages
 .vs/config/applicationhost.config
 
 #.Net core
-project.lock.json
+*.lock.json
+
+# Cake
+tools/
