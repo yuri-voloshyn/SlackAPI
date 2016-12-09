@@ -53,10 +53,10 @@ deploy:
   skip_symbols: false
   symbol_server: https://www.myget.org/F/slackapi/symbols/api/v2/package
 
-#- provider: NuGet
-#  name: production
-#  api_key:
-#    secure: xxx
-#  on:
-#    branch: master
-#    appveyor_repo_tag: true
+- provider: NuGet
+  name: production
+  api_key:
+    secure: OVMRfHowHPun4n8cJXPNGg==
+  on:
+    branch: master
+    appveyor_repo_tag: true
