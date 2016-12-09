@@ -1,3 +1,17 @@
+# Helper method to stop execution on first error
+function Exec
+{
+  [CmdletBinding()]
+  param(
+    [Parameter(Position=0,Mandatory=1)][scriptblock]$cmd,
+    [Parameter(Position=1,Mandatory=0)][string]$errorMessage = ($msgs.error_bad_command -f $cmd)
+  )
+  & $cmd 2>&1
+  if ($lastexitcode -ne 0) {
+    throw ("Exec: " + $errorMessage)
+  }
+}
+
 
 if (Test-Path .\artifacts) {
   echo "build: Cleaning .\artifacts"
@@ -5,7 +19,7 @@ if (Test-Path .\artifacts) {
 }
 
 
-& dotnet restore --no-cache
+exec { & dotnet restore --no-cache }
 
 
 # Generate suffix based on branch and revision. If branch is master with a valid build number, so suffix is empty (used for official releases)
@@ -30,8 +44,6 @@ if ($env:APPVEYOR_BUILD_VERSION -ne $NULL)
   }
 }
 
-& dotnet test .\SlackAPI.Tests -c Release
-if ($lastexitcode -ne 0) { exit 1 }
+exec { & dotnet test .\SlackAPI.Tests -c Release }
 
-& dotnet pack .\SlackAPI -c Release -o .\artifacts --version-suffix=$suffix
-if ($lastexitcode -ne 0) { exit 1 }
+exec { & dotnet pack .\SlackAPI -c Release -o .\artifacts --version-suffix=$suffix }

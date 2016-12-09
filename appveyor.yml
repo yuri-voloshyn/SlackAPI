@@ -36,7 +36,7 @@ before_build:
     $config | Set-Content SlackAPI.Tests\Configuration\config.json
 
 build_script:
-- ps : .\build.ps1 2>&1
+- ps : .\build.ps1
 
 test: off
 
