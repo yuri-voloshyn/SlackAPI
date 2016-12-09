@@ -36,8 +36,9 @@ if ($env:APPVEYOR_BUILD_VERSION -ne $NULL)
   Get-ChildItem -Path .\ -Recurse -File -Filter project.json | foreach {
     $jsonFile = Get-Content $_.FullName -raw | ConvertFrom-Json
     if ($jsonFile.version) {
-        $jsonFile.version = ([version]$ENV:APPVEYOR_BUILD_VERSION).ToString(3) + '-*'
-        echo "Updated $_.FullName with version $jsonFile.version"
+        $newVersion = ([version]$ENV:APPVEYOR_BUILD_VERSION).ToString(3) + '-*'
+        $jsonFile.version = $newVersion
+        echo "Updated $($_.FullName) with version $newVersion"
         $jsonFile | ConvertTo-Json -Depth 100 | Out-File $_.FullName
     }
   }

@@ -45,7 +45,7 @@ artifacts:
   name: Nuget packages
 
 deploy:
-- provider: Nuget
+- provider: NuGet
   server: https://www.myget.org/F/slackapi/api/v2
   api_key:
     secure: dt+bmkFjmkMgVdDXaaqTC4IRORfSrBSEePOGaaVPkEsKs/lGxxth21bkkBqMuJqM
@@ -53,10 +53,10 @@ deploy:
   skip_symbols: false
   symbol_server: https://www.myget.org/F/slackapi/symbols/api/v2/package
 
-- provider: NuGet
-  name: production
-  api_key:
-    secure: OVMRfHowHPun4n8cJXPNGg==
-  on:
-    branch: master
-    appveyor_repo_tag: true
+#- provider: NuGet
+#  name: production
+#  api_key:
+#    secure: OVMRfHowHPun4n8cJXPNGg==
+#  on:
+#    branch: master
+#    appveyor_repo_tag: true
