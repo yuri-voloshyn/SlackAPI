@@ -1,6 +1,6 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/5n9e7sruxpo0mw79/branch/master?svg=true)](https://ci.appveyor.com/project/Inumedia/slackapi/branch/master)
 [![NuGet](https://img.shields.io/nuget/v/SlackAPI.svg)](https://www.nuget.org/packages/SlackAPI/)
-[![MyGet Pre Release](https://img.shields.io/myget/slackapi/vpre/SlackAPI.svg)](https://www.myget.org/feed/Packages/slackapi)
+[![MyGet Pre Release](https://img.shields.io/myget/slackapi/vpre/SlackAPI.svg)](https://www.myget.org/feed/slackapi/package/nuget/SlackAPI)
 
 # SlackAPI
 
