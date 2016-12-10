@@ -4,9 +4,9 @@
 var configuration = Argument("configuration", "Release");
 var target = Argument("target", "Default");
 
-var project = File("./SlackAPI/project.json");
+var mainProject = File("./SlackAPI/project.json");
 var testProject = File("./SlackAPI.Tests/project.json");
-var projects = new[] { project, testProject };
+var projects = new[] { mainProject, testProject };
 var artifactsDirectory = Directory("./artifacts");
 var revision = AppVeyor.IsRunningOnAppVeyor ? AppVeyor.Environment.Build.Number : 0;
 var version = AppVeyor.IsRunningOnAppVeyor ? new Version(AppVeyor.Environment.Build.Version).ToString(3) : "1.0.0";
@@ -76,10 +76,14 @@ Task("Patch-ProjectJson")
 });
 
 
+Task("Patch")
+    .IsDependentOn("Patch-GlobalAssemblyVersions")
+    .IsDependentOn("Patch-ProjectJson");
+
+
 Task("Build")
     .IsDependentOn("Restore-Packages")
-    .IsDependentOn("Patch-GlobalAssemblyVersions")
-    .IsDependentOn("Patch-ProjectJson")
+    .IsDependentOn("Patch")
     .Does(() =>
 {
     foreach(var project in projects)
@@ -96,7 +100,8 @@ Task("Build")
 
 
 Task("Test")
-    .IsDependentOn("Build")
+    .IsDependentOn("Restore-Packages")
+    .IsDependentOn("Patch")
     .Does(() =>
 {
     DotNetCoreTest(
@@ -111,11 +116,12 @@ Task("Test")
 
 Task("Pack")
     .IsDependentOn("Clean")
+    .IsDependentOn("Build")
     .IsDependentOn("Test")
     .Does(() =>
 {
     DotNetCorePack(
-        project,
+        mainProject,
         new DotNetCorePackSettings
         {
             Configuration = configuration,
