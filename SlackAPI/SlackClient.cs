@@ -728,12 +728,20 @@ namespace SlackAPI
 
         public static Uri GetAuthorizeUri(string clientId, SlackScope scopes, string redirectUri = null, string state = null, string team = null)
         {
-            string theScopes = BuildScope(scopes);
+            return GetAuthorizeUri(clientId, BuildScope(scopes), redirectUri, state, team);
+        }
 
+        public static Uri GetAuthorizeUri(string clientId, IEnumerable<string> scopes, string redirectUri = null, string state = null, string team = null)
+        {
+            return GetAuthorizeUri(clientId, string.Join(",", scopes), redirectUri, state, team);
+        }
+
+        public static Uri GetAuthorizeUri(string clientId, string scopes, string redirectUri = null, string state = null, string team = null)
+        {
             return GetSlackUri("https://slack.com/oauth/authorize", new Tuple<string, string>[] { new Tuple<string, string>("client_id", clientId),
                 new Tuple<string, string>("redirect_uri", redirectUri),
-                new Tuple<string, string>("state", state), 
-                new Tuple<string, string>("scope", theScopes), 
+                new Tuple<string, string>("state", state),
+                new Tuple<string, string>("scope", scopes),
                 new Tuple<string, string>("team", team)});
         }
 

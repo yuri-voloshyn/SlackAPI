@@ -10,7 +10,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 
-#if NETSTANDARD1_6
+#if NETSTANDARD2_0
+using Microsoft.Extensions.DependencyModel;
+#elif NETSTANDARD1_6
 using Microsoft.Extensions.DependencyModel;
 #endif
 
@@ -43,6 +45,8 @@ namespace SlackAPI
             routing = new Dictionary<string, Dictionary<string, Type>>();
 #if NET45
              var assemblies = AppDomain.CurrentDomain.GetAssemblies().Where(x => x.GlobalAssemblyCache == false);
+#elif NETSTANDARD2_0
+             var assemblies = DependencyContext.Default.GetDefaultAssemblyNames().Select(Assembly.Load);
 #elif NETSTANDARD1_6
              var assemblies = DependencyContext.Default.GetDefaultAssemblyNames().Select(Assembly.Load);
 #elif NETSTANDARD1_3
